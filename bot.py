@@ -57,7 +57,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(
         "🤖 *How to use this bot:*\n\n"
-        "Simply type any question or message and I'll reply using ChatGPT.\n\n"
+        "Simply type any question or message and I'll reply using Gemini AI.\n\n"
         "Examples:\n"
         "• _What is machine learning?_\n"
         "• _Write a poem about the sea_\n"
@@ -76,6 +76,7 @@ async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_name = update.effective_user.first_name
     logger.info("Message from %s: %s", user_name, user_message)
 
+    # Show typing indicator
     await update.message.chat.send_action("typing")
 
     reply = ask_chatgpt(user_message)
@@ -97,4 +98,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-  
+    
