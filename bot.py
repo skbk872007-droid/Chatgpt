@@ -76,12 +76,13 @@ async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_name = update.effective_user.first_name
     logger.info("Message from %s: %s", user_name, user_message)
 
-    # Show typing indicator
-    await update.message.chat.send_action("typing")
+    waiting_msg = await update.message.reply_text("⏳ Please wait, I'm thinking...")
 
     reply = ask_chatgpt(user_message)
-    await update.message.reply_text(reply)
 
+    await waiting_msg.delete()
+
+    await update.message.reply_text(reply)
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main() -> None:
